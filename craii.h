@@ -45,7 +45,7 @@ static inline void _craii_fclose_wrapper(FILE **file)
     }
 }
 
-#define AUTO_CLOSE_FILE                                             FILE CLEANUP_VAR(_craii_fclose_wrapper)
+#define AUTO_CLOSE                                                  CLEANUP_VAR(_craii_fclose_wrapper)
 
 
 static inline void _craii_mutex_cleanup(pthread_mutex_t **lock)

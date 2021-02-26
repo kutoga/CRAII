@@ -10,7 +10,7 @@ Example:
 int example4(int p)
 {
     {
-        AUTO_CLOSE_FILE *f = fopen("my_file.txt", "r");
+        AUTO_CLOSE FILE*f = fopen("my_file.txt", "r");
         (void)f; // NOTE: f has the type FILE *
 
         if (p == 0) {
