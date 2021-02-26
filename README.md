@@ -1,7 +1,8 @@
 # CRAII
 
-Probably you are familiar with C++ RAII. Thanks to some gcc-extensions RAII can basically also be used
-in C. This allows to implement a lock guard or auto-closing files.
+Probably you are familiar with C++ RAII. Thanks to some gcc-extensions RAII can also be used
+in C (up to some degree). This allows to implement a lock guard (like `std::lock_guard`)
+or auto-closing files.
 
 Example:
 
