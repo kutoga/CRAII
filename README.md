@@ -24,7 +24,7 @@ int example4(int p)
     static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 
     {
-        M_LOCK_GUARD(&lock);
+        M_LOCK_GUARD(&lock); // S_LOCK_GUARD can be used for pthread_spinlock_t
         if (p == 1) {
             // lock is unlocked
             return 2;
@@ -152,7 +152,7 @@ int example4(int p)
     static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 
     {
-        M_LOCK_GUARD(&lock);
+        M_LOCK_GUARD(&lock); // S_LOCK_GUARD can be used for pthread_spinlock_t
         if (p == 1) {
             // lock is unlocked
             return 2;
