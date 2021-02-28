@@ -188,6 +188,9 @@ can be used for custom types and use-cases.
 
 ### Cleanup Variable
 
+Cleaning up variables can make code way easier to read. E.g., memory pools
+sometimes can be easier used by using this macro.
+
 ```C
 struct my_struct *my_struct_create();
 void my_struct_destroy(struct my_struct *my_struct);
@@ -284,6 +287,10 @@ int f(int a)
 ```
 
 ### Cleanup Function
+
+This is probably not very often needed, but it could be helpful:
+A function without a parameter is executed whenever the current
+block is left.
 
 ```C
 void do_something();
