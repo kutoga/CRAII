@@ -155,7 +155,7 @@ This code is equivalent to:
 ```C
 int my_func(const char *file, int x)
 {
-    AUTO_CLOSE(FILE *) fh = fopen(file, "w");
+    FILE * fh = fopen(file, "w");
 
     if (x == 0) {
         fprintf(fh, "xyz");
@@ -218,7 +218,7 @@ int my_struct_do_something(struct my_struct *my_struct);
 
 int f(int x)
 {
-    CLEANUP_VAR(my_struct_destroy) struct my_struct *ms = my_struct_create();
+    struct my_struct *ms = my_struct_create();
 
     if (x == 0) {
         my_struct_destroy(ms);

@@ -33,14 +33,14 @@ int example1(int p)
  * Value cleanup.
  */
 
-static void example2_cleanup(int **value)
+static void example2_cleanup(int *value)
 {
-    printf("Cleanup example 2: %d\n", **value);
+    printf("Cleanup example 2: %d\n", *value);
 }
 
-static void example2_cleanup2(int **value)
+static void example2_cleanup2(int *value)
 {
-    printf("Cleanup example 2 2: %d\n", **value);
+    printf("Cleanup example 2 2: %d\n", *value);
 }
 
 int example2(int p)

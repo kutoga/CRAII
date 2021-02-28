@@ -8,5 +8,5 @@ clean:
 	$(RM) $(TARGETS)
 
 main: main.c craii.h
-	gcc -O0 -Wall -Werror -Wextra $< -o $@ -std=gnu11
+	gcc -O0 -g -Wall -Werror -Wextra $< -o $@ -std=gnu11
 
