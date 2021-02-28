@@ -36,17 +36,27 @@ static inline void _craii_cleanup_wrapper(void (**f)())
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <pthread.h>
 
 static inline void _craii_fclose_wrapper(FILE **file)
 {
-    if (*file) {
+    if (*file != NULL) {
         fclose(*file);
     }
 }
 
-#define AUTO_CLOSE                                                  CLEANUP_VAR(_craii_fclose_wrapper)
+#define AUTO_CLOSE(t)                                               CLEANUP_VAR(_craii_fclose_wrapper) t
 
+#define _AUTO_FREE(t, counter)                                      \
+inline void _CRAII_VAR_NAME(counter) (t *value)                     \
+{                                                                   \
+    if (*value != NULL) {                                           \
+        free(*value);                                               \
+    }                                                               \
+}                                                                   \
+CLEANUP_VAR(_CRAII_VAR_NAME(counter)) t
+#define AUTO_FREE(t)                                                _AUTO_FREE(t, __COUNTER__)
 
 static inline void _craii_mutex_cleanup(pthread_mutex_t **lock)
 {

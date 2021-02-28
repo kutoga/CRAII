@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "craii.h"
 
 /*
@@ -96,7 +97,7 @@ int example3(int p)
 int example4(int p)
 {
     {
-        AUTO_CLOSE FILE *f = fopen("my_file.txt", "r");
+        AUTO_CLOSE(FILE *) f = fopen("my_file.txt", "r");
         (void)f; // NOTE: f has the type FILE *
 
         if (p == 0) {
@@ -118,11 +119,26 @@ int example4(int p)
         // lock is unlocked
     }
 
+    {
+        AUTO_FREE(char *) x = malloc(10);
+        strcpy(x, "test");
+
+        if (p == 3) {
+            // "if (x != NULL) free(x)" is called
+            return 1;
+        }
+
+        // "if (x != NULL) free(x)" is called
+    }
+
     return 0;
 }
 
 int main()
 {
+    AUTO_FREE(char *) x = malloc(100);
+    AUTO_FREE(char *) y = malloc(100);
+
     example1(0);
     example2(1);
     example3(2);
