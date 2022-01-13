@@ -55,9 +55,7 @@ static inline void _craii_fclose_wrapper(FILE **file)
 #define _AUTO_FREE(t, counter)                                          \
 inline void _CRAII_VAR_NAME(counter) (t *value)                         \
 {                                                                       \
-    if (*value != NULL) {                                               \
-        free(*value);                                                   \
-    }                                                                   \
+    free(*value);                                                       \
 }                                                                       \
 CLEANUP_VAR(_CRAII_VAR_NAME(counter)) t
 #define AUTO_FREE(t)                                                    _AUTO_FREE(t, __COUNTER__)

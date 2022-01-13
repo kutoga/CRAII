@@ -124,11 +124,11 @@ int example4(int p)
         strcpy(x, "test");
 
         if (p == 3) {
-            // "if (x != NULL) free(x)" is called
+            // "free(x)" is called
             return 1;
         }
 
-        // "if (x != NULL) free(x)" is called
+        // "free(x)" is called
     }
 
     return 0;

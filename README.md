@@ -65,7 +65,9 @@ int f(int x)
 # Auto Free
 
 Sometimes its needed to allocate some buffer and just free it at the end
-of the block. This can be simplified by using the `AUTO_FREE`-macro:
+of the block. This can be simplified by using the `AUTO_FREE`-macro. Note
+that `free(NULL)` is valid and well-defined which means it's also okay
+if the freed variable has the value `NULL`. An example:
 
 ```C
 int f(int x)
@@ -100,26 +102,20 @@ int f(int x)
     if (x == 0) {
         get_name(str);
         printf("name=%s\n", str);
-        if (str != NULL) {
-            free(str);
-        }
+        free(str);
         return 0;
     }
 
     if (x == 1) {
         get_location(str);
         printf("location=%s\n", str);
-        if (str != NULL) {
-            free(str);
-        }
+        free(str);
         return 2;
     }
 
     get_country(str);
     printf("country=%s\n", str);
-    if (str != NULL) {
-        free(str);
-    }
+    free(str);
     return 12;
 }
 ```
