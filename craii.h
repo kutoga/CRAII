@@ -11,6 +11,8 @@
 #define _craii_auto_type                                                __auto_type
 #endif
 
+#define _CRAII_FORCE_INLINE                                             __attribute__((__always_inline__)) inline
+
 #define _CRAII_CONCAT(a, b, c)                                          a ## __ ## b ## __ ## c
 #define _CRAII_CONCAT2(a, b, c)                                         _CRAII_CONCAT(a, b, c)
 #define _CRAII_VAR_NAME_BASE                                            _craii_var
@@ -18,7 +20,7 @@
 
 #define CLEANUP_VAR(cleanup_function)                                   __attribute__((__cleanup__(cleanup_function)))
 #define _CRAII_CLEANUP_VAL(value, cleanup_function, counter, counter2)  \
-void _CRAII_VAR_NAME(counter)(void **val)                               \
+_CRAII_FORCE_INLINE void _CRAII_VAR_NAME(counter)(void **val)           \
 {                                                                       \
     cleanup_function(*val);                                             \
 }                                                                       \
@@ -28,7 +30,7 @@ _craii_auto_type _CRAII_VAR_NAME(counter2)                              \
 
 #define CLEANUP_VAL(value, cleanup_function)                            _CRAII_CLEANUP_VAL((value), cleanup_function, __COUNTER__, __COUNTER__)
 
-static inline void _craii_cleanup_wrapper(void (*f)())
+static _CRAII_FORCE_INLINE void _craii_cleanup_wrapper(void (*f)())
 {
     f();
 }
@@ -53,7 +55,7 @@ static inline void _craii_fclose_wrapper(FILE **file)
 #define AUTO_CLOSE(t)                                                   CLEANUP_VAR(_craii_fclose_wrapper) t
 
 #define _AUTO_FREE(t, counter)                                          \
-inline void _CRAII_VAR_NAME(counter) (t *value)                         \
+_CRAII_FORCE_INLINE void _CRAII_VAR_NAME(counter) (t *value)            \
 {                                                                       \
     free(*value);                                                       \
 }                                                                       \
